@@ -1,4 +1,4 @@
-$tourney = "low-elo-legends-week-13"
+$tourney = Invoke-RestMethod "https://raw.githubusercontent.com/cmcaul03/LELRanks/main/current-tourney?raw=true"
 
 $players_response = Invoke-RestMethod "https://api.smash.gg/tournament/$tourney`?expand[]=entrants"
 
