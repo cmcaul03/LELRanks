@@ -1,4 +1,11 @@
-$tourney = Invoke-RestMethod "https://raw.githubusercontent.com/cmcaul03/LELRanks/main/current-tourney?raw=true"
+$tourney = Invoke-WebRequest "https://raw.githubusercontent.com/cmcaul03/LELRanks/main/current-tourney?raw=true"
+
+$tourney = $tourney.Content
+
+$tourney = $tourney.ToString()
+
+$tourney = $tourney -replace "`t|`n|`r",""
+$tourney = $tourney -replace " ;|; ",";"
 
 $players_response = Invoke-RestMethod "https://api.smash.gg/tournament/$tourney`?expand[]=entrants"
 
@@ -157,6 +164,7 @@ tbody tr:last-of-type {
 }
 </style>
 <p>Last updated at: $time UTC. There were $total_players players found.</p>
+<a href="https://aoeranks.cammcauliffe.com"></a>
 "@
 
 $team_data | Sort-Object -Property "Hidden Rank" | ConvertTo-Html -Head $head | Out-File "D:\AOERanks\web\$tourney.html"
