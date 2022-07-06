@@ -163,8 +163,7 @@ tbody tr:last-of-type {
     border-bottom: 2px solid #009879;
 }
 </style>
-<p>Last updated at: $time UTC. There were $total_players players found.</p>
-<a href="https://aoeranks.cammcauliffe.com"></a>
+<p>Last updated at: $time UTC. There were $total_players players found. <a href="https://aoeranks.cammcauliffe.com">Shit Menu</a></p>
 "@
 
 $team_data | Sort-Object -Property "Hidden Rank" | ConvertTo-Html -Head $head | Out-File "D:\AOERanks\web\$tourney.html"
