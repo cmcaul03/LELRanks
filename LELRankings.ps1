@@ -50,7 +50,27 @@ Foreach ($player_ob in $players) {
         $profileId = "3696245"
     }elseif ($player -eq "everlast") {
         $player = "everlast007"
+    }elseif ($player -eq "DEAC-Hackers | KosdaBence") {
+        $player = "KosdaBence"
+    }elseif ($player -eq "frij | FRIJ00") {
+        $player = "Frijolero"
+    }elseif ($player -eq "Rizzler7 | Rizzler7") {
+        $player = "Rizzler7"
+    }elseif ($player -eq "MTP | unknoowbody") {
+        $player = "unknoowbody"
+    }elseif ($player -eq "EZ | MID") {
+        $player = "MID"
+        $profileId = "8216671"
+    }elseif ($player -eq "RDK") {
+        $profileId = "3781236"
+    }elseif ($player -eq "Justin") {
+        $player = "Justin"
+        $profileId = "1760517"
+    }elseif ($player -eq "Maximus") {
+        $player = "Maximus"
+        $profileId = "2518513"
     }
+
 
     $response = Invoke-RestMethod "https://aoeiv.net/leaderboard/aoe4/season-1?draw=6&columns[0][data]=&columns[0][name]=&columns[0][searchable]=false&columns[0][orderable]=true&columns[0][search][value]=&columns[0][search][regex]=false&columns[1][data]=&columns[1][name]=&columns[1][searchable]=false&columns[1][orderable]=true&columns[1][search][value]=&columns[1][search][regex]=false&columns[2][data]=&columns[2][name]=&columns[2][searchable]=true&columns[2][orderable]=true&columns[2][search][value]=&columns[2][search][regex]=false&columns[3][data]=&columns[3][name]=&columns[3][searchable]=false&columns[3][orderable]=true&columns[3][search][value]=&columns[3][search][regex]=false&columns[4][data]=&columns[4][name]=&columns[4][searchable]=false&columns[4][orderable]=true&columns[4][search][value]=&columns[4][search][regex]=false&columns[5][data]=&columns[5][name]=&columns[5][searchable]=false&columns[5][orderable]=true&columns[5][search][value]=&columns[5][search][regex]=false&columns[6][data]=&columns[6][name]=&columns[6][searchable]=false&columns[6][orderable]=true&columns[6][search][value]=&columns[6][search][regex]=false&columns[7][data]=&columns[7][name]=&columns[7][searchable]=false&columns[7][orderable]=true&columns[7][search][value]=&columns[7][search][regex]=false&order[0][column]=0&order[0][dir]=asc&start=0&length=100&search[value]=$player&search[regex]=false&_=1655526809872"
 
@@ -67,10 +87,10 @@ Foreach ($player_ob in $players) {
         }
     }
 
-    if($response.data.count -eq 1) {
+    if($response.data.count -eq 1 -and $profileId -eq $null) {
         $player_object | Add-Member -MemberType NoteProperty -Name "Ladder Elo" -Value $response.data.rating -Force
         $player_object | Add-Member -MemberType NoteProperty -Name "Ladder Rank" -Value $response.data[0].rank -Force}
-    elseif($profile -ne $null) {
+    elseif($profileId -ne $null) {
         $player_object | Add-Member -MemberType NoteProperty -Name "Ladder Elo" -Value $response.rating -Force
         $player_object | Add-Member -MemberType NoteProperty -Name "Ladder Rank" -Value $response.rank -Force}
     else {
@@ -88,10 +108,17 @@ Foreach ($player_ob in $players) {
 
     $count2 = $response2.items.Count
 
+    $test = 1
+
     Foreach ($object in $response2.items) {
         if ($object.rlUserId -eq $profileId) {
             $response2 = $object
+            $test = 0
         }
+    }
+
+    if ($test -eq 1) {
+        $profileId = $null
     }
 
     if ($count2 -eq 1 -and $profileId -eq $null) {
@@ -109,6 +136,18 @@ Foreach ($player_ob in $players) {
     $player_object | Add-Member -MemberType NoteProperty -Name "Hidden Rank" -Value "There was $count2 matches" -Force
     $player_object | Add-Member -MemberType NoteProperty -Name "Games Played" -Value "There was $count2 matches" -Force
     $player_object | Add-Member -MemberType NoteProperty -Name "Registered For" -Value $event_name -Force
+    }
+
+    if ($response.rating -eq $null -and $response.data.rating -eq $null) {
+        $player_object | Add-Member -MemberType NoteProperty -Name "Ladder Elo" -Value "There was $count matches for the string $player" -Force
+        $player_object | Add-Member -MemberType NoteProperty -Name "Ladder Rank" -Value "There was $count matches"  -Force}
+    
+
+    if ($response2.elo -eq $null -and $response2.items[0].elo -eq $null) {
+        $player_object | Add-Member -MemberType NoteProperty -Name "Hidden Elo" -Value "There was $count2 matches for the string $player" -Force
+        $player_object | Add-Member -MemberType NoteProperty -Name "Hidden Rank" -Value "There was $count2 matches" -Force
+        $player_object | Add-Member -MemberType NoteProperty -Name "Games Played" -Value "There was $count2 matches" -Force
+        $player_object | Add-Member -MemberType NoteProperty -Name "Registered For" -Value $event_name -Force
     }
 
     $team_data += $player_object
