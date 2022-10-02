@@ -21,6 +21,7 @@ $csv = import-csv $csv_path$csv_name
 
     $lel_team_data = @()
     $twc_team_data = @()
+    $other_team_data = @()
 
     $event_response = Invoke-RestMethod "https://api.smash.gg/tournament/$tourney`?expand[]=event"
 
@@ -422,6 +423,9 @@ $csv = import-csv $csv_path$csv_name
         } elseif ($player_object.'Registered For' -like "*Low Elo Legends*") {
             $lel_team_data += $player_object
             $lel_total_players=$lel_total_players +1
+        } else {
+            $other_team_data += $player_object
+            $other_total_players=$other_total_players +1
         }
     }
     
@@ -476,12 +480,19 @@ $csv = import-csv $csv_path$csv_name
     </style>
     <p>Last updated at: $time UTC. <a href="https://aoeranks.cammcauliffe.com">Shit Menu</a>
 "@
-Add-Type -AssemblyName System.Web
-$lel_html = $lel_team_data | Sort-Object -Property "Hidden Rank", "Bracket" | ConvertTo-Html "AOE Name","Start GG Name","Ladder Elo","Ladder Rank","Hidden Elo","Hidden Rank","Games Played","Registered For", "Bracket" -Head ($head + " There were $lel_total_players players found. </p>")
-[System.Web.HttpUtility]::HtmlDecode($lel_html) |  Out-File "D:\AOERanks\web\LEL-$tourney.html"
 
-$twc_html = $twc_team_data | Sort-Object -Property "Registered For", "Hidden Rank", "Bracket" | ConvertTo-Html "AOE Name","Start GG Name","Ladder Elo","Ladder Rank","Hidden Elo","Hidden Rank","Games Played","Registered For", "Bracket" -Head ($head + " There were $twc_total_players players found. </p>")
-[System.Web.HttpUtility]::HtmlDecode($twc_html) |  Out-File "D:\AOERanks\web\TWC-$tourney.html"
+Add-Type -AssemblyName System.Web
+
+        if ($tourney -like "*rising-empires*") {
+                $lel_html = $lel_team_data | Sort-Object -Property "Hidden Rank", "Bracket" | ConvertTo-Html "AOE Name","Start GG Name","Ladder Elo","Ladder Rank","Hidden Elo","Hidden Rank","Games Played","Registered For", "Bracket" -Head ($head + " There were $lel_total_players players found. </p>")
+                [System.Web.HttpUtility]::HtmlDecode($lel_html) |  Out-File "D:\AOERanks\web\LEL-$tourney.html"
+
+                $twc_html = $twc_team_data | Sort-Object -Property "Registered For", "Hidden Rank", "Bracket" | ConvertTo-Html "AOE Name","Start GG Name","Ladder Elo","Ladder Rank","Hidden Elo","Hidden Rank","Games Played","Registered For", "Bracket" -Head ($head + " There were $twc_total_players players found. </p>")
+                [System.Web.HttpUtility]::HtmlDecode($twc_html) |  Out-File "D:\AOERanks\web\TWC-$tourney.html"
+        } else {
+                $other_html = $other_team_data | Sort-Object -Property "Registered For", "Hidden Rank", "Bracket" | ConvertTo-Html "AOE Name","Start GG Name","Ladder Elo","Ladder Rank","Hidden Elo","Hidden Rank","Games Played","Registered For", "Bracket" -Head ($head + " There were $other_total_players players found. </p>")
+                [System.Web.HttpUtility]::HtmlDecode($other_html) |  Out-File "D:\AOERanks\web\OTHER-$tourney.html"
+        }
 
 }
 }
