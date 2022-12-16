@@ -1,8 +1,22 @@
 ﻿$tourneys = Invoke-WebRequest -Headers @{"Cache-Control"="no-cache"} "https://raw.githubusercontent.com/cmcaul03/LELRanks/main/current-tourney?raw=true"
 $tourneys = $tourneys.content
-$csv_path = "D:\AOERanks\"
-$csv_name = "AOE4World Dump 17-09-2022.csv"
-$csv = import-csv $csv_path$csv_name
+$current_path = Get-Location
+$download_name = "AOE4World_Dump"
+
+$FolderName = "$current_path\web\"
+if (Test-Path $FolderName) {
+}
+else
+{
+    New-Item $FolderName -ItemType Directory
+}
+
+
+$dumps = Invoke-RestMethod https://aoe4world.com/api/v0/data_dumps
+$dump = $dumps | Where-Object {$_.key -eq "leadersboards/rm_1v1/elo"}
+$gz = Invoke-RestMethod $dump.url -OutFile "$current_path$download_name.gz"
+C:\'Program Files'\7-Zip\7z.exe x "$current_path$download_name.gz" -y
+$csv = import-csv "$current_path\rm_1v1_0.csv"
 
     Foreach ($tourney in $tourneys -split "`n") {
 
@@ -92,11 +106,39 @@ $csv = import-csv $csv_path$csv_name
 
         if ($player -eq "Moketronics") {
             $player = "Moketronics7740"
-        } elseif ($player -eq "OmnissiahMaster") {
+        }elseif ($player -eq "OmnissiahMaster") {
             $player = "OmnissiaH"
             $profileId = "10481437"
+        }elseif ($player -eq "CaptainTank") {
+            $player = "Captain Tank"
+            $profileId = "6522555"
+        }elseif ($player -eq "Vito | Lord Vito On Drugs") {
+            $player = "danxz"
+            $profileId = "11466432"
+        }elseif ($player -eq "fenix") {
+            $profileId = "11020395"
         }elseif ($player -eq "Daywalker") {
             $player = "DayWalker7617"
+        }elseif ($player -eq "miked1991") {
+            $player = "	miked"
+            $profileId = "1531382"
+        }elseif ($player -eq "Combi | _ChIvO__") {
+            $player = "Combi | _ChIvO__"
+            $profileId = "1913468"
+        }elseif ($player -eq "barun511") {
+            $player = "[WoP]barun511"
+            $profileId = "3283060"
+        }elseif ($player -eq "bruhvinash") {
+            $player = "weboom6643"
+            $profileId = "11464533"
+        }elseif ($player -eq "Cow") {
+            $profileId = "11070410"
+        }elseif ($player -eq "Dindi9896") {
+            $profileId = "11541652"
+        }elseif ($player -eq "Extra Deep Throat") {
+            $profileId = "7096362"
+        }elseif ($player -eq "bingchilling") {
+            $profileId = "11645430"
         }elseif ($player -eq "[Wl]_freecapsack") {
             $player = "Rise of Patience"
         }elseif ($player -eq "Cynique" -or $player -eq "El Cyniquo") {
@@ -247,9 +289,12 @@ $csv = import-csv $csv_path$csv_name
         }elseif ($player -eq "Seb") {
             $player = "Seb"
             $profileId = "1043916"
-        }elseif ($player -eq "Hustler") {
-            $player = "Hustl3r1606"
-            $profileId = "7508502"
+        }elseif ($player -eq "Seb") {
+            $player = "Seb"
+            $profileId = "1043916"
+        }elseif ($player -eq "iNcog") {
+            $player = "iNcoGG"
+            $profileId = "11264344"
         }elseif ($player -eq "Hustler") {
             $player = "Hustl3r1606"
             $profileId = "7508502"
@@ -259,9 +304,9 @@ $csv = import-csv $csv_path$csv_name
         }elseif ($player -eq "Hustler") {
             $player = "Hustl3r1606"
             $profileId = "7508502"
-        }elseif ($player -eq "Hustler") {
-            $player = "Hustl3r1606"
-            $profileId = "7508502"
+        }elseif ($player -eq "bwhit | mindless dribble") {
+            $player = "mindless dribble"
+            $profileId = "7437888"
         }elseif ($player -eq "Buzzingrapier86 | Anubis") {
             $player = "BuzzingRapier86"
             $profileId = "9363257"
@@ -271,9 +316,45 @@ $csv = import-csv $csv_path$csv_name
         }elseif ($player -eq "Crackedy") {
             $player = "CrackedyHere"
             $profileId = "230361"
+        }elseif ($player -eq "[LASAGNE] | Le Garf") {
+            $player = "Garfield'sGapingGulper"
+            $profileId = "6103016"
         }elseif ($player -eq "Hustler") {
             $player = "Hustl3r1606"
             $profileId = "7508502"
+        }elseif ($player -eq "Hustler") {
+            $player = "Hustl3r1606"
+            $profileId = "7508502"
+        }elseif ($player -eq "N/A | Fury Road") {
+            $player = "FuryRoad"
+            $profileId = "10724618"
+        }elseif ($player -eq "Boo") {
+            $player = "NerdyZen"
+            $profileId = "9908462"
+        }elseif ($player -eq "SkWizZ | CarterSC2") {
+            $player = "SkWizZ_Carter"
+            $profileId = "9200788"
+        }elseif ($player -eq "NyC | jRemix") {
+            $player = "Yo my guy"
+            $profileId = "230548"
+        }elseif ($player -eq "felipemkp") {
+            $player = "fmkp"
+            $profileId = "3368992"
+        }elseif ($player -eq "Mkoll") {
+            $player = "𝕄𝕜𝕠𝕝𝕝"
+            $profileId = "76561198048952014"
+        }elseif ($player -eq "Pokemonuniteplayer") {
+            $player = "Easy Ai(bot)"
+            $profileId = "7140821"
+        }elseif ($player -eq "Phanatic") {
+            $player = "Phanatic"
+            $profileId = "73290"
+        }elseif ($player -eq "KingGeo07") {
+            $player = "SnapShot"
+            $profileId = "4617596"
+        }elseif ($player -eq "felipemkp") {
+            $player = "fmkp"
+            $profileId = "3368992"
         }elseif ($player -eq "felipemkp") {
             $player = "fmkp"
             $profileId = "3368992"
@@ -324,7 +405,7 @@ $csv = import-csv $csv_path$csv_name
         }
         else {
             
-            $response = Invoke-RestMethod "https://aoeiv.net/api/leaderboard?game=aoe4&event_leaderboard_id=1&start=1&count=10&profile_id=$profileId"
+            #$response = Invoke-RestMethod "https://aoeiv.net/api/leaderboard?game=aoe4&event_leaderboard_id=1&start=1&count=10&profile_id=$profileId"
 
             $player_object | Add-Member -MemberType NoteProperty -Name "Ladder Elo" -Value $response.leaderboard[0].rating -Force
             $player_object | Add-Member -MemberType NoteProperty -Name "Ladder Rank" -Value $response.leaderboard[0].rank -Force
@@ -370,12 +451,12 @@ $csv = import-csv $csv_path$csv_name
             $player_object | Add-Member -MemberType NoteProperty -Name "Games Played" -Value ($response2.wins + $response2.losses) -Force
         } elseif ($csv -match $profileId) {
             $player_csv_object = $csv | Where-Object {$_.profile_id -Match $profileId}
-            $player_object | Add-Member -MemberType NoteProperty -Name "Hidden Elo" -Value ($player_csv_object.rating + " (from $csv_name)") -Force
+            $player_object | Add-Member -MemberType NoteProperty -Name "Hidden Elo" -Value ($player_csv_object.rating + " (from $download_name)") -Force
             $player_object | Add-Member -MemberType NoteProperty -Name "Hidden Rank" -Value $player_csv_object.rank -Force
             $player_object | Add-Member -MemberType NoteProperty -Name "Games Played" -Value $player_csv_object.games_count -Force
         } elseif ($csv -match $player) {
             $player_csv_object = $csv | Where-Object {$_.Name -Match $player}
-            $player_object | Add-Member -MemberType NoteProperty -Name "Hidden Elo" -Value ($player_csv_object.rating + " (from $csv_name)") -Force
+            $player_object | Add-Member -MemberType NoteProperty -Name "Hidden Elo" -Value ($player_csv_object.rating + " (from $download_name)") -Force
             $player_object | Add-Member -MemberType NoteProperty -Name "Hidden Rank" -Value $player_csv_object.rank -Force
             $player_object | Add-Member -MemberType NoteProperty -Name "Games Played" -Value $player_csv_object.games_count -Force
         }  else {
@@ -485,13 +566,13 @@ Add-Type -AssemblyName System.Web
 
         if ($tourney -like "*rising-empires*") {
                 $lel_html = $lel_team_data | Sort-Object -Property "Hidden Rank", "Bracket" | ConvertTo-Html "AOE Name","Start GG Name","Ladder Elo","Ladder Rank","Hidden Elo","Hidden Rank","Games Played","Registered For", "Bracket" -Head ($head + " There were $lel_total_players players found. </p>")
-                [System.Web.HttpUtility]::HtmlDecode($lel_html) |  Out-File "D:\AOERanks\web\LEL-$tourney.html"
+                [System.Web.HttpUtility]::HtmlDecode($lel_html) |  Out-File "$current_path\web\LEL-$tourney.html"
 
                 $twc_html = $twc_team_data | Sort-Object -Property "Registered For", "Hidden Rank", "Bracket" | ConvertTo-Html "AOE Name","Start GG Name","Ladder Elo","Ladder Rank","Hidden Elo","Hidden Rank","Games Played","Registered For", "Bracket" -Head ($head + " There were $twc_total_players players found. </p>")
-                [System.Web.HttpUtility]::HtmlDecode($twc_html) |  Out-File "D:\AOERanks\web\TWC-$tourney.html"
+                [System.Web.HttpUtility]::HtmlDecode($twc_html) |  Out-File "$current_path\web\TWC-$tourney.html"
         } else {
                 $other_html = $other_team_data | Sort-Object -Property "Registered For", "Hidden Rank", "Bracket" | ConvertTo-Html "AOE Name","Start GG Name","Ladder Elo","Ladder Rank","Hidden Elo","Hidden Rank","Games Played","Registered For", "Bracket" -Head ($head + " There were $other_total_players players found. </p>")
-                [System.Web.HttpUtility]::HtmlDecode($other_html) |  Out-File "D:\AOERanks\web\OTHER-$tourney.html"
+                [System.Web.HttpUtility]::HtmlDecode($other_html) |  Out-File "$current_path\web\OTHER-$tourney.html"
         }
 
 }
