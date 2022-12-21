@@ -1,3 +1,4 @@
+cd "D:\GIT\LELRanks"
 $tourneys = gci .\web\*.html
 $archive_tourneys = gci .\web\Archive\*.html
 $tourney_data = @()
