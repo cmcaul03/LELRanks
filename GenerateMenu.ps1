@@ -17,8 +17,6 @@ ForEach($tourney in $archive_tourneys) {
     $archive_tourney_data += $archive_tourney_object
 }
 
-$tourney_object | Add-Member -MemberType NoteProperty -Name "Name" -Value "<a href=`"https://cmcaul03.github.io/LELRanks/web/archive/index.html`">Archive</a>"  -Force
-
 $Time = Get-Date
 $Time = $Time.ToUniversalTime()
 
@@ -77,4 +75,8 @@ $tourneys_html = $tourney_data | ConvertTo-Html "Name" -Head ($head + "</p>")
 [System.Web.HttpUtility]::HtmlDecode($tourneys_html) |  Out-File ".\index.html"
 
 $archive_tourneys_html = $archive_tourney_data | ConvertTo-Html "Name" -Head ($head + "</p>")
-[System.Web.HttpUtility]::HtmlDecode($archive_tourneys_html) |  Out-File ".\web\index.html"
+[System.Web.HttpUtility]::HtmlDecode($archive_tourneys_html) |  Out-File ".\web\archive.html"
+
+git add *
+git commit --message "Autoupdate"
+git push
