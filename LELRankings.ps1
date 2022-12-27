@@ -545,7 +545,7 @@ $csv = import-csv $csv_path$csv_name
         border-bottom: 2px solid #009879;
     }
     </style>
-    <p>Last updated at: $time UTC. <a href="https://risingempires.cammcauliffe.com">Shit Menu</a>
+    <p>Last updated at: $time UTC. <a href="http://risingempires.cammcauliffe.com">Shit Menu</a>
 "@
 
 Add-Type -AssemblyName System.Web
