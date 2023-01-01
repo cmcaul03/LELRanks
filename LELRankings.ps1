@@ -564,4 +564,8 @@ Add-Type -AssemblyName System.Web
 }
 }
 
+pause
+
 powershell.exe "D:\GIT\LELRanks\GenerateMenu.ps1"
+
+pause
