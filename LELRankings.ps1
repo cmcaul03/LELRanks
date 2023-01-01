@@ -16,8 +16,8 @@ $Time = Get-Date
 $dumps = Invoke-RestMethod https://aoe4world.com/api/v0/data_dumps
 $dump = $dumps | Where-Object {$_.key -eq "leadersboards/rm_1v1/elo"}
 if ((Get-Date $dump.updated_at) -lt (Get-Date).AddDays(-3)) {
-    $gz = Invoke-RestMethod $dump.url -OutFile "$current_path$download_name.gz"
-    C:\'Program Files'\7-Zip\7z.exe x "$current_path$download_name.gz" -y
+    $gz = Invoke-RestMethod $dump.url -OutFile "$current_path\$download_name.gz"
+    C:\'Program Files'\7-Zip\7z.exe x "$current_path\$download_name.gz" -y
 }
 $csv = import-csv "$current_path\rm_1v1_0.csv"
 
