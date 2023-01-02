@@ -1,4 +1,6 @@
 ﻿$StartGG_URI = "https://api.start.gg/gql/alpha"
+$current_path = split-path -parent $MyInvocation.MyCommand.Definition
+
 
 Function Get-CurrentTournamentList () {
     $tourneys = Invoke-WebRequest -Headers @{"Cache-Control"="no-cache"} "https://raw.githubusercontent.com/cmcaul03/LELRanks/main/current-tourney?raw=true"
@@ -7,7 +9,7 @@ Function Get-CurrentTournamentList () {
 }
 
 Function Get-AllTournamentList () {
-    Return (gc "D:\AOERanks\all-tourneys.txt")
+    Return (gc "$current_path\all-tourneys.txt")
 }
 
 Function Get-StartGGCredential () {
@@ -78,7 +80,7 @@ $winners = @()
 Foreach($tourney in $current_tourneys) {
     if($all_tourneys -notcontains $tourney) {
         $all_tourneys += $tourney
-        $all_tourneys | Out-File "D:\AOERanks\all-tourneys.txt"
+        $all_tourneys | Out-File "$current_path\all-tourneys.txt"
     }
 }
 
@@ -156,4 +158,4 @@ Foreach($tourney in $tourneys_details) {
 
 
 $winner_html = $winners | Sort-Object -Descending -Property "Sort Object", "Event" | ConvertTo-Html "Name","Tournament","Event","Placement" -Head $head
-[System.Web.HttpUtility]::HtmlDecode($winner_html) |  Out-File "D:\AOERanks\web\previous_winners.html"
+[System.Web.HttpUtility]::HtmlDecode($winner_html) |  Out-File "$current_path\web\previous_winners.html"
