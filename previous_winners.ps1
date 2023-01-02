@@ -1,6 +1,6 @@
 ﻿$StartGG_URI = "https://api.start.gg/gql/alpha"
 $current_path = split-path -parent $MyInvocation.MyCommand.Definition
-
+$current_path | Out-File D:\GIT\LELRanks\test.txt -Append 
 
 Function Get-CurrentTournamentList () {
     $tourneys = Invoke-WebRequest -Headers @{"Cache-Control"="no-cache"} "https://raw.githubusercontent.com/cmcaul03/LELRanks/main/current-tourney?raw=true"

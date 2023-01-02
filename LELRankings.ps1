@@ -1,7 +1,9 @@
 ﻿$tourneys = Invoke-WebRequest -Headers @{"Cache-Control"="no-cache"} "https://raw.githubusercontent.com/cmcaul03/LELRanks/main/current-tourney?raw=true"
 $tourneys = $tourneys.content
 $download_name = "AOE4World_Dump"
+"test" | Out-File D:\GIT\LELRanks\test.txt -Append 
 $current_path = split-path -parent $MyInvocation.MyCommand.Definition
+$current_path | Out-File D:\GIT\LELRanks\test.txt -Append 
 
 $FolderName = "$current_path\web\"
 if (Test-Path $FolderName) {
@@ -580,5 +582,7 @@ Add-Type -AssemblyName System.Web
 
 }
 }
+
+"here" | Out-File D:\GIT\LELRanks\test.txt -Append 
 
 powershell.exe "$current_path\GenerateMenu.ps1"

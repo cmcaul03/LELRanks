@@ -4,6 +4,8 @@ $archive_tourneys = gci .\web\Archive\*.html
 $tourney_data = @()
 $archive_tourney_data = @()
 
+"here2" | Out-File D:\GIT\LELRanks\test.txt -Append 
+
 ForEach($tourney in $tourneys) {
     $name = $tourney.Name
     $tourney_object = New-Object PSObject
@@ -78,6 +80,6 @@ $tourneys_html = $tourney_data | ConvertTo-Html "Name" -Head ($head + "</p>")
 $archive_tourneys_html = $archive_tourney_data | ConvertTo-Html "Name" -Head ($head + "</p>")
 [System.Web.HttpUtility]::HtmlDecode($archive_tourneys_html) |  Out-File ".\web\archive.html"
 
-git add *
-git commit --message "Autoupdate"
-git push
+git add * | Out-File D:\GIT\LELRanks\test.txt -Append 
+git commit --message "Autoupdate" | Out-File D:\GIT\LELRanks\test.txt -Append 
+git push | Out-File D:\GIT\LELRanks\test.txt -Append 
