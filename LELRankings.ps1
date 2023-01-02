@@ -1,9 +1,7 @@
 ﻿$tourneys = Invoke-WebRequest -Headers @{"Cache-Control"="no-cache"} "https://raw.githubusercontent.com/cmcaul03/LELRanks/main/current-tourney?raw=true"
 $tourneys = $tourneys.content
 $download_name = "AOE4World_Dump"
-"test" | Out-File D:\GIT\LELRanks\test.txt -Append 
 $current_path = split-path -parent $MyInvocation.MyCommand.Definition
-$current_path | Out-File D:\GIT\LELRanks\test.txt -Append 
 
 $FolderName = "$current_path\web\"
 if (Test-Path $FolderName) {
@@ -497,7 +495,7 @@ $csv = import-csv "$current_path\rm_1v1_0.csv"
         $player_object | Add-Member -MemberType NoteProperty -Name "Bracket" -Value $player_bracket_name -Force
 
         $player_object.'Hidden Rank' = [int]($player_object.'Hidden Rank')
-        $player_object
+        $player_object 
 
         $event_link = "<a href=`"https://www.start.gg/$event_slug`">$event_name</a>"
 
@@ -582,7 +580,5 @@ Add-Type -AssemblyName System.Web
 
 }
 }
-
-"here" | Out-File D:\GIT\LELRanks\test.txt -Append 
 
 powershell.exe "$current_path\GenerateMenu.ps1"
