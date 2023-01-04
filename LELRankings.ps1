@@ -112,6 +112,15 @@ $csv = import-csv "$current_path\rm_1v1_0.csv"
         }elseif ($player -eq "OmnissiahMaster") {
             $player = "OmnissiaH"
             $profileId = "10481437"
+        }elseif ($player -eq "eulenberg") {
+            $player = "Jimmy Neutron"
+            $profileId = "6970118"
+        }elseif ($player -eq "Racoondog") {
+            $player = "Feigi"
+            $profileId = "1464301"
+        }elseif ($player -eq "Enesbg4") {
+            $player = "Poise TB-2"
+            $profileId = "12111572"
         }elseif ($player -eq "CaptainTank") {
             $player = "Captain Tank"
             $profileId = "6522555"
