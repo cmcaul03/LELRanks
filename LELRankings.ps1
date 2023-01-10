@@ -3,6 +3,8 @@ $tourneys = $tourneys.content
 $download_name = "AOE4World_Dump"
 $current_path = split-path -parent $MyInvocation.MyCommand.Definition
 
+git pull $current_path
+
 $FolderName = "$current_path\web\"
 if (Test-Path $FolderName) {
 }
