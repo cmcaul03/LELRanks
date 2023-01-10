@@ -1,5 +1,6 @@
 cd "D:\GIT\LELRanks"
 $tourneys = gci .\web\*.html
+$tourneys += gci .\web\*.csv
 $archive_tourneys = gci .\web\Archive\*.html
 $tourney_data = @()
 $archive_tourney_data = @()
