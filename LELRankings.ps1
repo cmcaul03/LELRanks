@@ -579,9 +579,11 @@ Add-Type -AssemblyName System.Web
         if ($tourney -like "*rising-empires*") {
                 $lel_html = $lel_team_data | Sort-Object -Property "Hidden Rank", "Bracket" | ConvertTo-Html "AOE Name","Start GG Name","Ladder Elo","Ladder Rank","Hidden Elo","Hidden Rank","Games Played","Registered For", "Bracket" -Head ($head + " There were $lel_total_players players found. </p>")
                 [System.Web.HttpUtility]::HtmlDecode($lel_html) |  Out-File "$current_path\web\LEL-$tourney.html"
+                $lel_team_data | Sort-Object -Property "Hidden Rank", "Bracket" | Export-CSV  "$current_path\web\LEL-$tourney.csv"
 
                 $twc_html = $twc_team_data | Sort-Object -Property "Registered For", "Hidden Rank", "Bracket" | ConvertTo-Html "AOE Name","Start GG Name","Ladder Elo","Ladder Rank","Hidden Elo","Hidden Rank","Games Played","Registered For", "Bracket" -Head ($head + " There were $twc_total_players players found. </p>")
                 [System.Web.HttpUtility]::HtmlDecode($twc_html) |  Out-File "$current_path\web\TWC-$tourney.html"
+                $twc_team_data | Sort-Object -Property "Hidden Rank", "Bracket" | Export-CSV  "$current_path\web\TWC-$tourney.csv"
         } else {
                 $other_html = $other_team_data | Sort-Object -Property "Registered For", "Hidden Rank", "Bracket" | ConvertTo-Html "AOE Name","Start GG Name","Ladder Elo","Ladder Rank","Hidden Elo","Hidden Rank","Games Played","Registered For", "Bracket" -Head ($head + " There were $other_total_players players found. </p>")
                 [System.Web.HttpUtility]::HtmlDecode($other_html) |  Out-File "$current_path\web\OTHER-$tourney.html"
