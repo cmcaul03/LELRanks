@@ -81,4 +81,4 @@ $archive_tourneys_html = $archive_tourney_data | ConvertTo-Html "Name" -Head ($h
 
 git add *
 git commit --message "Autoupdate"
-git push
+git push --force
