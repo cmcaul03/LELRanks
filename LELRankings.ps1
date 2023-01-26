@@ -120,6 +120,15 @@ $csv = import-csv "$current_path\rm_1v1_0.csv"
         }elseif ($player -eq "Racoondog") {
             $player = "Feigi"
             $profileId = "1464301"
+        }elseif ($player -eq "Taha24 | KobeDoge") {
+            $player = "Taha24"
+            $profileId = "1007570"
+        }elseif ($player -eq "GT | mjerticla") {
+            $player = "GT_Mjerticla"
+            $profileId = "6600634"
+        }elseif ($player -eq "KingSmurf") {
+            $player = "[R.E.] KingSmurf"
+            $profileId = "8010816"
         }elseif ($player -eq "Enesbg4") {
             $player = "Poise TB-2"
             $profileId = "12111572"
