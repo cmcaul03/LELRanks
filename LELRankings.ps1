@@ -23,6 +23,10 @@ if ((Get-Date $dump.updated_at) -lt (Get-Date).AddDays(-3)) {
 }
 $csv = import-csv "$current_path\rm_1v1_0.csv"
 
+$csv_date = Get-ChildItem -Path "$current_path\rm_1v1_0.csv" | select CreationTime
+
+$csv_date = $csv_date.CreationTime
+
     Foreach ($tourney in $tourneys -split "`n") {
 
     # echo "tourney is: $tourney" }
@@ -120,6 +124,15 @@ $csv = import-csv "$current_path\rm_1v1_0.csv"
         }elseif ($player -eq "Racoondog") {
             $player = "Feigi"
             $profileId = "1464301"
+        }elseif ($player -eq "Obiwankevinobi") {
+            $player = "What r u doing step gamer ??"
+            $profileId = "12176996"
+        }elseif ($player -eq "21Capable") {
+            $player = "¢αραbℓє"
+            $profileId = "1628773"
+        }elseif ($player -eq "OMG | FoX D i E") {
+            $player = "FoX D i E"
+            $profileId = "1145293"
         }elseif ($player -eq "Taha24 | KobeDoge") {
             $player = "Taha24"
             $profileId = "1007570"
@@ -474,12 +487,12 @@ $csv = import-csv "$current_path\rm_1v1_0.csv"
             $player_object | Add-Member -MemberType NoteProperty -Name "Games Played" -Value ($response2.wins + $response2.losses) -Force
         } elseif ($csv -match $profileId) {
             $player_csv_object = $csv | Where-Object {$_.profile_id -Match $profileId}
-            $player_object | Add-Member -MemberType NoteProperty -Name "Hidden Elo" -Value ($player_csv_object.rating + " (from $csv_name)") -Force
+            $player_object | Add-Member -MemberType NoteProperty -Name "Hidden Elo" -Value ($player_csv_object.rating + " (from $csv_date)") -Force
             $player_object | Add-Member -MemberType NoteProperty -Name "Hidden Rank" -Value $player_csv_object.rank -Force
             $player_object | Add-Member -MemberType NoteProperty -Name "Games Played" -Value $player_csv_object.games_count -Force
         } elseif ($csv -match $player) {
             $player_csv_object = $csv | Where-Object {$_.Name -Match $player}
-            $player_object | Add-Member -MemberType NoteProperty -Name "Hidden Elo" -Value ($player_csv_object.rating + " (from $csv_name)") -Force
+            $player_object | Add-Member -MemberType NoteProperty -Name "Hidden Elo" -Value ($player_csv_object.rating + " (from $csv_date)") -Force
             $player_object | Add-Member -MemberType NoteProperty -Name "Hidden Rank" -Value $player_csv_object.rank -Force
             $player_object | Add-Member -MemberType NoteProperty -Name "Games Played" -Value $player_csv_object.games_count -Force
         }  else {
