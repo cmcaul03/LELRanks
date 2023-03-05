@@ -607,7 +607,7 @@ $csv_date = $csv_date.CreationTime
 Add-Type -AssemblyName System.Web
 
         if ($tourney -like "*rising-empires*") {
-                $lel_html = $lel_team_data | Sort-Object -Property "Hidden Elo", "Bracket" -Descending | ConvertTo-Html "AOE Name","Start GG Name","Ladder Elo","Ladder Rank","Hidden Elo","Hidden Rank","Games Played","Registered For", "Bracket" -Head ($head + " There were $lel_total_players players found. </p>")
+                $lel_html = $lel_team_data | Sort-Object -Property "Hidden Elo" -Descending | ConvertTo-Html "AOE Name","Start GG Name","Ladder Elo","Ladder Rank","Hidden Elo","Hidden Rank","Games Played","Registered For" -Head ($head + " There were $lel_total_players players found. </p>")
                 [System.Web.HttpUtility]::HtmlDecode($lel_html) |  Out-File "$current_path\web\LEL-$tourney.html"
                 $lel_team_data | Sort-Object -Property "Hidden Rank", "Bracket" | Export-CSV  "$current_path\web\LEL-$tourney.csv" -NoTypeInformation
 
