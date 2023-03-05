@@ -493,12 +493,12 @@ $csv_date = $csv_date.CreationTime
             $player_object | Add-Member -MemberType NoteProperty -Name "Games Played" -Value ($response2.wins + $response2.losses) -Force
         } elseif ($csv -match $profileId) {
             $player_csv_object = $csv | Where-Object {$_.profile_id -Match $profileId}
-            $player_object | Add-Member -MemberType NoteProperty -Name "Hidden Elo" -Value ($player_csv_object.rating + " (from $csv_date)") -Force
+            $player_object | Add-Member -MemberType NoteProperty -Name "Hidden Elo" -Value ($player_csv_object.rating) -Force
             $player_object | Add-Member -MemberType NoteProperty -Name "Hidden Rank" -Value $player_csv_object.rank -Force
             $player_object | Add-Member -MemberType NoteProperty -Name "Games Played" -Value $player_csv_object.games_count -Force
         } elseif ($csv -match $player) {
             $player_csv_object = $csv | Where-Object {$_.Name -Match $player}
-            $player_object | Add-Member -MemberType NoteProperty -Name "Hidden Elo" -Value ($player_csv_object.rating + " (from $csv_date)") -Force
+            $player_object | Add-Member -MemberType NoteProperty -Name "Hidden Elo" -Value ($player_csv_object.rating) -Force
             $player_object | Add-Member -MemberType NoteProperty -Name "Hidden Rank" -Value $player_csv_object.rank -Force
             $player_object | Add-Member -MemberType NoteProperty -Name "Games Played" -Value $player_csv_object.games_count -Force
         }  else {
@@ -607,7 +607,7 @@ $csv_date = $csv_date.CreationTime
 Add-Type -AssemblyName System.Web
 
         if ($tourney -like "*rising-empires*") {
-                $lel_html = $lel_team_data | Sort-Object -Property "Hidden Rank", "Bracket" | ConvertTo-Html "AOE Name","Start GG Name","Ladder Elo","Ladder Rank","Hidden Elo","Hidden Rank","Games Played","Registered For", "Bracket" -Head ($head + " There were $lel_total_players players found. </p>")
+                $lel_html = $lel_team_data | Sort-Object -Property "Hidden Elo", "Bracket" | ConvertTo-Html "AOE Name","Start GG Name","Ladder Elo","Ladder Rank","Hidden Elo","Hidden Rank","Games Played","Registered For", "Bracket" -Head ($head + " There were $lel_total_players players found. </p>")
                 [System.Web.HttpUtility]::HtmlDecode($lel_html) |  Out-File "$current_path\web\LEL-$tourney.html"
                 $lel_team_data | Sort-Object -Property "Hidden Rank", "Bracket" | Export-CSV  "$current_path\web\LEL-$tourney.csv" -NoTypeInformation
 
