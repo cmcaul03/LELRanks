@@ -136,7 +136,7 @@ Function Export-Data ($tournament_entrants, $event) {
 
     $tournament_entrants | Sort-Object -Property "Team Name" | Export-CSV  "D:\GIT\LELRanks\web\$event-testing-tourney.csv" -NoTypeInformation
 
-    $export_html = $tournament_entrants | Sort-Object -Property "Elo", "Event" | ConvertTo-Html -Head ($head + " There were "+$tournament_entrants.Length+" players found. </p>")
+    $export_html = $tournament_entrants | Sort-Object -Property "Elo", "Event" -Descending | ConvertTo-Html -Head ($head + " There were "+$tournament_entrants.Length+" players found. </p>")
     [System.Web.HttpUtility]::HtmlDecode($export_html) |  Out-File "D:\GIT\LELRanks\web\$event-testing.html"
 }
 
