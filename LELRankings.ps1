@@ -19,7 +19,7 @@ $Time = Get-Date
 
 $dumps = Invoke-RestMethod https://aoe4world.com/api/v0/data_dumps
 $dump = $dumps | Where-Object {$_.key -eq "leadersboards/rm_1v1/elo"}
-if ((Get-Date $dump.updated_at) -gt (Get-Date).AddDays(-3)) {
+if ((Get-Date $dump.updated_at) -lt (Get-Date).AddDays(3)) {
     $gz = Invoke-RestMethod $dump.url -OutFile "$current_path\$download_name.gz"
     C:\'Program Files'\7-Zip\7z.exe x "$current_path\$download_name.gz" -y
 }
@@ -607,7 +607,7 @@ $csv_date = $csv_date.CreationTime
 Add-Type -AssemblyName System.Web
 
         if ($tourney -like "*rising-empires*") {
-                $lel_html = $lel_team_data | Sort-Object -Property 'Hidden Elo'| ConvertTo-Html "AOE Name","Start GG Name","Ladder Elo","Ladder Rank","Hidden Elo","Hidden Rank","Games Played","Registered For" -Head ($head + " There were $lel_total_players players found. </p>")
+                $lel_html = $lel_team_data | Sort-Object -Property 'Hidden Elo' -Descending| ConvertTo-Html "AOE Name","Start GG Name","Ladder Elo","Ladder Rank","Hidden Elo","Hidden Rank","Games Played","Registered For" -Head ($head + " There were $lel_total_players players found. </p>")
                 [System.Web.HttpUtility]::HtmlDecode($lel_html) |  Out-File "$current_path\web\LEL-$tourney.html"
                 $lel_team_data | Sort-Object -Property "Hidden Rank", "Bracket" | Export-CSV  "$current_path\web\LEL-$tourney.csv" -NoTypeInformation
 

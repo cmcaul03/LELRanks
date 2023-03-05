@@ -71,7 +71,7 @@ Function Get-Stats ($player_name) {
                 }
             }
         else {
-            $elo_object | Add-Member -MemberType NoteProperty -Name "rm_1v1_elo" -Value $profile_id -Force
+            $elo_object | Add-Member -MemberType NoteProperty -Name "rm_solo" -Value $profile_id -Force
         }
         $elo_object | Add-Member -MemberType NoteProperty -Name "ProfileID" -Value $profile_id -Force
     }
@@ -151,7 +151,7 @@ Function Get-EntrantData ($tournament_name) {
             $entrant_object | Add-Member -MemberType NoteProperty -Name "Name" -Value ("<a href=`"https://aoe4world.com/players/"+$stats.ProfileID+"`">"+$entrant.participants[0].gamerTag+"</a>")  -Force
             $entrant_object | Add-Member -MemberType NoteProperty -Name "Ladder Rating" -Value $stats.rm_solo -Force
             $entrant_object | Add-Member -MemberType NoteProperty -Name "Ladder Rank" -Value $stats.rm_1v1_elo -Force
-            $entrant_object | Add-Member -MemberType NoteProperty -Name "Elo" -Value $stats.rm_1v1_elo -Force
+            $entrant_object | Add-Member -MemberType NoteProperty -Name "Elo" -Value ([int]($stats.rm_1v1_elo)) -Force
             $entrant_object | Add-Member -MemberType NoteProperty -Name "Win Rate" -Value $stats.rm_1v1_elo_win_rate -Force
             $entrant_object | Add-Member -MemberType NoteProperty -Name "Event" -Value $event.Name -Force
             $tournament_entrants += $entrant_object
