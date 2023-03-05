@@ -82,8 +82,8 @@ Function Export-Data ($tournament_entrants, $event) {
 Function Get-EntrantData ($tournament_name) {
     $profileid_csv = import-csv "D:\AOERanks\profile-ids.csv"
     $tournament = Get-TournamentDetails ($tournament_name)
-    $tournament_entrants = @()
     Foreach ($event in $tournament.data.tournament.events) {
+        $tournament_entrants = @()
         Foreach ($entrant in $event.entrants.nodes) {
             $entrant_object = New-Object PSObject
             $stats = Get-Stats $entrant.participants[0].gamerTag
@@ -92,9 +92,22 @@ Function Get-EntrantData ($tournament_name) {
             $entrant_object | Add-Member -MemberType NoteProperty -Name "Ladder Rank" -Value $stats.rm_1v1_elo -Force
             $entrant_object | Add-Member -MemberType NoteProperty -Name "Elo" -Value $stats.rm_1v1_elo -Force
             $entrant_object | Add-Member -MemberType NoteProperty -Name "Win Rate" -Value $stats.rm_1v1_elo_win_rate -Force
+            $entrant_object | Add-Member -MemberType NoteProperty -Name "Event" -Value $event.Name -Force
             $tournament_entrants += $entrant_object
         }
-        Export-Data $tournament_entrants $event.name
+        if ($event.Name -match "Low Elo Legends") {
+            $lel_data += $tournament_entrants
+        } elseif ($event.Name -match "Warchief") {
+            $twc_data += $tournament_entrants
+        } else {
+            Export-Data $tournament_entrants ("$tournament_name-"+$event.name)
+        }
+    }
+
+    if ($lel_data -ne $null) {
+        Export-Data $lel_data ("LEL-$tournament_name")
+    } elseif ($twc_data -ne $null) {
+        Export-Data $twc_data ("TWC-$tournament_name")
     }
 }
 
