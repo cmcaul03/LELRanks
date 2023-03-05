@@ -402,8 +402,8 @@ $csv_date = $csv_date.CreationTime
             $profileId = "2235803"
         }
 
-        if ($profileid_csv -match $player_name) {
-            $profileId = ($profileid_csv | Where-Object {$_.player -Match $player_name}).profile_id
+        if ($profileid_csv -match $player) {
+            $profileId = ($profileid_csv | Where-Object {$_.player -Match $player}).profile_id
         }
 
         if ($player -match "\|") {
@@ -533,7 +533,7 @@ $csv_date = $csv_date.CreationTime
 
         $player_object | Add-Member -MemberType NoteProperty -Name "Bracket" -Value $player_bracket_name -Force
 
-        $player_object.'Hidden Rank' = [int]($player_object.'Hidden Rank')
+        $player_object.'Hidden Rank' = ($player_object.'Hidden Rank')
         $player_object 
 
         $event_link = "<a href=`"https://www.start.gg/$event_slug`">$event_name</a>"
