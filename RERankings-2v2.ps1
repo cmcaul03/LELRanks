@@ -38,9 +38,10 @@
 }
 
 Function Get-ProfileId ($player_name) {
+    # $player_name = "01"
     write-host $player_name
     if ($profileid_csv -match $player_name) {
-        $profileid = ($profileid_csv | Where-Object {$_.player -Match $player_name}).profile_id
+        $profileid = ($profileid_csv | Where-Object {$_.player -match $player_name}).profile_id | select-object -Last 1
         return $profileid
     }
     $response = Invoke-RestMethod "https://aoe4world.com/api/v0/players/search?query=$player_name"
