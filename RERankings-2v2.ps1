@@ -78,7 +78,7 @@ Function Export-Data ($tournament_entrants) {
 }
 
 Function Get-EntrantData ($tournament_name) {
-    $profileid_csv = import-csv "D:\AOERanks\profile-ids.csv"
+    $profileid_csv = import-csv "D:\GIT\LELRanks\profile-ids.csv"
     $tournament_name = "rising-empires-2v2-showdown"
     $tournament = Get-TournamentDetails ($tournament_name)
     $tournament_entrants = @()
