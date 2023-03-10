@@ -11,7 +11,7 @@
             events {
                 name
                 id
-                entrants {
+                entrants (query: { page: 1, perPage: 300 }) {
                     nodes {
                         name
                         initialSeedNum
