@@ -408,7 +408,7 @@ $csv_date = $csv_date.CreationTime
         }
 
         if ($profileid_csv -match $player) {
-            $profileId = ($profileid_csv | Where-Object {"^$_.player$" -Match $player}).profile_id | select-object -Last 1
+            $profileId = ($profileid_csv | Where-Object {$_.player -Match "^$player$"}).profile_id | select-object -Last 1
         }
 
         $response = ""
