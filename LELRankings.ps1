@@ -402,13 +402,13 @@ $csv_date = $csv_date.CreationTime
             $profileId = "2235803"
         }
 
-        if ($profileid_csv -match $player) {
-            $profileId = ($profileid_csv | Where-Object {$_.player -Match $player}).profile_id | select-object -Last 1
-        }
-
         if ($player -match "\|") {
             $player = ($player.Split(" | "))
             $player = $player[($player.Length-1)]
+        }
+
+        if ($profileid_csv -match $player) {
+            $profileId = ($profileid_csv | Where-Object {$_.player -Match $player}).profile_id | select-object -Last 1
         }
 
         $response = ""
