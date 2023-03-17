@@ -3,7 +3,7 @@ $tourneys = $tourneys.content
 $download_name = "AOE4World_Dump"
 $current_path = split-path -parent $MyInvocation.MyCommand.Definition
 $current_path="D:\GIT\LELRanks\"
-$profileid_csv = import-csv "D:\AOERanks\profile-ids.csv"
+$profileid_csv = import-csv "D:\GIT\LELRanks\profile-ids.csv"
 
 git pull ($current_path)
 
@@ -403,7 +403,7 @@ $csv_date = $csv_date.CreationTime
         }
 
         if ($profileid_csv -match $player) {
-            $profileId = ($profileid_csv | Where-Object {$_.player -Match $player}).profile_id
+            $profileId = ($profileid_csv | Where-Object {$_.player -Match $player}).profile_id | select-object -Last 1
         }
 
         if ($player -match "\|") {
