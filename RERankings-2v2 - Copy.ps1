@@ -1,13 +1,14 @@
 ﻿Function Get-TournamentDetails ($tournament_name) {
     $StartGG_URI = "https://api.start.gg/gql/alpha"
     $cred = gc "C:\StartGG_cred.txt"
-    #$tournament_name = "low-elo-legends"
+    $tournament_name = "rising-empires-weeklies-30"
     $headers = @{Authorization="Bearer $cred"}
 
     $query = '
     query tournament($slug: String) {
         tournament(slug: $slug) {
-            id 
+            id
+            startAt 
             events {
                 name
                 id
@@ -33,6 +34,7 @@
 "@
 
     $tournament_details = Invoke-GraphQLQuery -Query $query -Variables $variables -Headers $headers -Uri $StartGG_URI
+    $tournament_details.data.tournament.startAt
 
     Return $tournament_details
 }
