@@ -1,11 +1,11 @@
 "Team Name","Participant 1 - Name","Participant 1 - 1v1 Elo","Participant 1 - 2v2 Elo","Participant 1 - 3v3 Elo","Participant 1 - 4v4 Elo","Participant 2 - Name","Participant 2 - 1v1 Elo","Participant 2 - 2v2 Elo","Participant 2 - 3v3 Elo","Participant 2 - 4v4 Elo","Participant 3 - Name","Participant 3 - 1v1 Elo","Participant 3 - 2v2 Elo","Participant 3 - 3v3 Elo","Participant 3 - 4v4 Elo"
 ".:TEAM:. Cheppy / .:TEAM:.ZombieMind",".:TEAM:. Cheppy","1468","1466","1253","1306",".:TEAM:.ZombieMind",,,,,,,,,
 "[E-gear]Arabskiy_TIGER / Itarossa / Antoxa","Itarossa","1558","1426","1389","1494","[E-gear]Arabskiy_TIGER","1513","1272","1217","1245","Antoxa","1696","1483","1320",
-"01 / shadow","01","1599","1560","1568","1556","shadow",,,,,,,,,
+"01 / shadow","01","1599","1560","1568","1539","shadow",,,,,,,,,
 "Altair3.0 / Gollum","Altair3.0","856","1343","1499","1578","Gollum",,,,,,,,,
 "antihero3mio der VIII / Ezra123","antihero3mio der VIII","1476","1425","1070",,"Ezra123","1539","1530","1288",,,,,,
 "Araken / cornonjakobe","cornonjakobe","1565","1559","1400",,"Araken",,,,,,,,,
-"Balls Of Christ / Ragin' Richard / DeftJackal","DeftJackal",,,,,"Ragin' Richard",,,,,"Balls Of Christ","994","1029","1080","781"
+"Balls Of Christ / Ragin' Richard / DeftJackal","DeftJackal","1359","1358","1384",,"Ragin' Richard",,"904","895","776","Balls Of Christ","994","1029","1080","781"
 "Bonanzaii / HeliosEdiy","Bonanzaii","1011","1116","958",,"HeliosEdiy","1174","1062","1068",,,,,,
 "b? ????? / loueMT","b? ?????",,,,,"loueMT",,,,,,,,,
 "Camiknoedel / kaker","Camiknoedel","1689","1608","1055",,"kaker",,,,,,,,,
@@ -17,14 +17,14 @@
 "Heri / General Romos","Heri",,,,,"General Romos",,"1002","1013",,,,,,
 "housedhorse / jiglypuf62 / Laughing_Fox","jiglypuf62","1431","1543","1702","1641","Laughing_Fox","1570","1623","1703","1618","housedhorse",,"1677","1610","1478"
 "ILLMASTER / ELITE.MIKO","ILLMASTER",,,,,"ELITE.MIKO",,,,,,,,,
-"Jabar Jabroni / CS Blight","Jabar Jabroni","1158","1123","1013","971","CS Blight","1043","1050","1192",,,,,,
+"Jabar Jabroni / CS Blight","Jabar Jabroni","1158","1142","1013","971","CS Blight","1043","1050","1192",,,,,,
 "LegolaS / UtinOwns","LegolaS",,,,,"UtinOwns",,,,,,,,,
 "LIONHEARTE / Shadewalkin / MysteriousX","LIONHEARTE",,,,,"Shadewalkin","1133","1143","1071","1294","MysteriousX",,,,
 "LovePierogi / Werbix","LovePierogi","1338","1286","1123","1229","Werbix","1576","1314","1217","1296",,,,,
 "Lucas / Dreyken","Dreyken","1002","934",,,"Lucas",,,,,,,,,
 "Menedas / SuperPenguin","Menedas",,"1232",,,"SuperPenguin",,,,,,,,,
 "Mophideus / Tiberius","Tiberius",,,,,"Mophideus","1125","1203","1148","1039",,,,,
-"Muhodo / Speedeor 10139245 / KyrreLubiWod?","Muhodo","1661","1483","1188","1593","Speedeor","1599","1560","1568","1556","KyrreLubiWod?","1449","1431",,
+"Muhodo / Speedeor 10139245 / KyrreLubiWod?","Muhodo","1661","1483","1188","1593","Speedeor","1599","1560","1568","1539","KyrreLubiWod?","1449","1431",,
 "N A U T I L U S / Undacava","N A U T I L U S","1157","1170","1308","1131","Undacava",,,,,,,,,
 "Niclas001 / Mizzsazza","Niclas001",,,,,"Mizzsazza",,"1020","1040","1035",,,,,
 "Niroxs / Swissblaze","Niroxs","1571","1665","1483",,"Swissblaze","1425","1539","1280","1219",,,,,
@@ -33,7 +33,7 @@
 "Obiwankevinobi / MaximusInvictus","MaximusInvictus",,,,,"Obiwankevinobi","1186","1057","1087",,,,,,
 "OpDVlaM / Everlast007","Everlast007","1469","1381","1225","1189","OpDVlaM","1575","1443","1329",,,,,,
 "Rainer / Massena","Rainer",,,,,"Massena",,,,,,,,,
-"Rentalbeast8160 / Fury Road / AshenOsprey","Fury Road",,,,,"Rentalbeast8160",,,,,"AshenOsprey",,,,
+"Rentalbeast8160 / Fury Road / AshenOsprey","Fury Road",,,,,"Rentalbeast8160",,,,,"AshenOsprey","1273","1150","1436","1282"
 "Rode / GandelfWarrior / Howard Beale","Rode","1291","1136","1120",,"GandelfWarrior","1131","1110","1014",,"Howard Beale","1143","1095","1147","1165"
 "RoyalPleco / Moo","RoyalPleco",,,,,"Moo",,,,,,,,,
 "situx / Goatkowski","Goatkowski",,,,,"situx","1369","1377","1550","1419",,,,,
@@ -42,4 +42,4 @@
 "Thebaldeagle / Thisisachore","Thebaldeagle","1063","1039","998","1033","Thisisachore","1071","1056","1000",,,,,,
 "timurlain / Lomax1992","timurlain","1111","1079","1148","1114","Lomax1992","1201","1173","1179","1188",,,,,
 "Top Kitten / Feigi","Feigi","1128","1174","1105",,"Top Kitten",,,,,,,,,
-"Vucsko / nclaver","Vucsko","1352","1320",,,"nclaver","1320","1320",,,,,,,
+"Vucsko / nclaver","Vucsko","1352","1327",,,"nclaver","1320","1327",,,,,,,
