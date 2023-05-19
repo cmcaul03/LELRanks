@@ -1,4 +1,5 @@
-﻿$tourneys = Invoke-WebRequest -Headers @{"Cache-Control"="no-cache"} "https://raw.githubusercontent.com/cmcaul03/LELRanks/main/current-tourney?raw=true"
+﻿$random = Get-Random
+$tourneys = Invoke-WebRequest -Headers @{"Cache-Control"="no-cache"} "https://raw.githubusercontent.com/cmcaul03/LELRanks/main/current-tourney?raw=true&rand=$random"
 $tourneys = $tourneys.content
 $download_name = "AOE4World_Dump"
 $current_path = split-path -parent $MyInvocation.MyCommand.Definition
