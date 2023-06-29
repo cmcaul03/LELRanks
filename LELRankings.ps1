@@ -41,7 +41,7 @@ $csv_date = $csv_date.CreationTime
     $tourney = $tourney -replace "`t|`n|`r",""
     $tourney = $tourney -replace " ;|; ",";"
 
-    $players_response = Invoke-RestMethod "https://api.smash.gg/tournament/$tourney`?expand[]=entrants"
+    $players_response = Invoke-RestMethod "https://api.start.gg/tournament/$tourney`?expand[]=entrants"
 
     $players = $players_response.entities.entrants
 
