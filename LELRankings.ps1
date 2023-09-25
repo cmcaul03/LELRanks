@@ -6,6 +6,8 @@ $current_path = split-path -parent $MyInvocation.MyCommand.Definition
 $current_path="D:\GIT\LELRanks\"
 $profileid_csv = import-csv "D:\GIT\LELRanks\profile-ids.csv"
 
+$Time = Get-Date
+
 git pull ($current_path)
 
 $FolderName = "$current_path\web\"
@@ -16,7 +18,7 @@ else
     New-Item $FolderName -ItemType Directory
 }
 
-$Time = Get-Date
+
 
 $dumps = Invoke-RestMethod https://aoe4world.com/api/v0/data_dumps
 $dump = $dumps | Where-Object {$_.key -eq "leadersboards/rm_1v1/elo"}
@@ -43,6 +45,8 @@ $csv_date = $csv_date.CreationTime
 
     $players_response = Invoke-RestMethod "https://api.start.gg/tournament/$tourney`?expand[]=entrants"
 
+
+
     $players = $players_response.entities.entrants
 
     $lel_team_data = @()
@@ -54,6 +58,10 @@ $csv_date = $csv_date.CreationTime
     $group_response = Invoke-RestMethod "https://api.smash.gg/tournament/$tourney`?expand[]=groups"
 
     $events = $event_response.entities.event
+
+    if ($events[0].endAt > $Time) {
+        "D:\GIT\LELRanks\current-tourney"
+    }
 
     $groups = $group_response.entities.groups
 
