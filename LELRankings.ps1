@@ -45,7 +45,10 @@ $csv_date = $csv_date.CreationTime
 
     $players_response = Invoke-RestMethod "https://api.start.gg/tournament/$tourney`?expand[]=entrants"
 
-
+    if ($players_response -eq $null) {
+        $tourney = $tourney.Replace('empires','empire')
+        $players_response = Invoke-RestMethod "https://api.start.gg/tournament/$tourney`?expand[]=entrants"
+    }
 
     $players = $players_response.entities.entrants
 
@@ -617,7 +620,7 @@ $csv_date = $csv_date.CreationTime
 
 Add-Type -AssemblyName System.Web
 
-        if ($tourney -like "*rising-empires*") {
+        if ($tourney -like "*rising-empire*") {
                 $lel_html = $lel_team_data | Sort-Object -Property 'Hidden Elo' -Descending| ConvertTo-Html "AOE Name","Start GG Name","Ladder Elo","Ladder Rank","Hidden Elo","Hidden Rank","Games Played","Registered For" -Head ($head + " There were $lel_total_players players found. </p>")
                 [System.Web.HttpUtility]::HtmlDecode($lel_html) |  Out-File "$current_path\web\LEL-$tourney.html"
                 $lel_team_data | Sort-Object -Property "Hidden Rank", "Bracket" | Export-CSV  "$current_path\web\LEL-$tourney.csv" -NoTypeInformation
