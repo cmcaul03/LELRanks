@@ -46,7 +46,7 @@ $csv_date = $csv_date.CreationTime
     $players_response = Invoke-RestMethod "https://api.start.gg/tournament/$tourney`?expand[]=entrants"
 
     $map_pool = node "D:\testing\scrape.js" $tourney
-    $map_pool | out-file "$current_path\web\map_pool.html"
+    $map_pool | out-file "$current_path\web\map_pool"
 
     if ($players_response -eq $null) {
         $tourney = $tourney.Replace('empires','empire')
