@@ -67,7 +67,7 @@ $csv_date = $csv_date.CreationTime
 
     $events = $event_response.entities.event
 
-    if ($events[0].endAt -lt ((New-TimeSpan -Start (Get-Date "01/01/1970") -End (Get-Date)).TotalSeconds)) {
+    if (($events[0].endAt + 86400) -lt ((New-TimeSpan -Start (Get-Date "01/01/1970") -End (Get-Date)).TotalSeconds)) {
         $current_tourney_number = [int]($tourney -replace '\D+(\d+)','$1')
         $next_tourney =  "rising-empires-weeklies-"+($current_tourney_number+1)
         Set-Content -Path "D:\GIT\LELRanks\current-tourney" -Value $next_tourney
