@@ -35,7 +35,7 @@ $csv_date = $csv_date.CreationTime
     Foreach ($tourney in $tourneys -split "`n") {
 
     # echo "tourney is: $tourney" }
-
+    # $tourney = "rising-empires-weeklies-53"
     if ($tourney -ne "") {
 
     $tourney = $tourney.ToString()
@@ -62,6 +62,8 @@ $csv_date = $csv_date.CreationTime
     $other_team_data = @()
 
     $event_response = Invoke-RestMethod "https://api.smash.gg/tournament/$tourney`?expand[]=event"
+
+    "https://www.start.gg/$($event_response.entities.tournament.slug)/events" | out-file "$current_path\web\brackets"
 
     $group_response = Invoke-RestMethod "https://api.smash.gg/tournament/$tourney`?expand[]=groups"
 
