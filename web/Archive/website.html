@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Players Table</title>
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    table, th, td {
+        border: 1px solid black;
+    }
+    th, td {
+        padding: 8px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+    }
+</style>
+</head>
+<body>
+
+<h2>Players Table</h2>
+
+<table id="playersTable">
+    <thead>
+        <tr>
+            <th>Gamer Tag</th>
+            <th>Seed</th>
+            <th>Event Name</th>
+            <th>Profile ID</th>
+            <th>Rank</th>
+            <th>Rating</th>
+            <th>Games Count</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Table rows will be added here dynamically -->
+    </tbody>
+</table>
+
+<script>
+    // Assuming "players_data.json" is the path to your JSON file
+    fetch('players_data.json')
+    .then(response => response.json())
+    .then(data => {
+        const tableBody = document.getElementById('playersTable').getElementsByTagName('tbody')[0];
+        data.forEach(player => {
+            let row = tableBody.insertRow();
+            row.insertCell(0).textContent = player.gamer_tag;
+            row.insertCell(1).textContent = player.seed;
+            row.insertCell(2).textContent = player.event_name;
+            row.insertCell(3).textContent = player.profile_id || 'N/A';
+            row.insertCell(4).textContent = player.rank || 'N/A';
+            row.insertCell(5).textContent = player.rating || 'N/A';
+            row.insertCell(6).textContent = player.games_count || 'N/A';
+        });
+    })
+    .catch(error => console.error('Error loading the JSON data:', error));
+</script>
+
+</body>
+</html>
