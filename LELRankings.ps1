@@ -1,8 +1,8 @@
-﻿$random = Get-Random
+﻿$current_path = split-path -parent $MyInvocation.MyCommand.Definition
+$random = Get-Random
 $tourneys = Invoke-WebRequest -Headers @{"Cache-Control"="no-cache"} "https://raw.githubusercontent.com/cmcaul03/LELRanks/main/current-tourney?raw=true&rand=$random"
 $tourneys = $tourneys.content
-$download_name = "AOE4World_Dump"
-$current_path = split-path -parent $MyInvocation.MyCommand.Definition
+$download_name = "rm_1v1_0.csv"
 $current_path="D:\GIT\LELRanks\"
 $profileid_csv = import-csv "D:\GIT\LELRanks\profile-ids.csv"
 
@@ -18,14 +18,16 @@ else
     New-Item $FolderName -ItemType Directory
 }
 
+$now = Get-Date
 
-
-$dumps = Invoke-RestMethod https://aoe4world.com/api/v0/data_dumps
-$dump = $dumps | Where-Object {$_.key -eq "leadersboards/rm_1v1/elo"}
-if ((Get-Date $dump.updated_at) -lt (Get-Date).AddDays(-3)) {
+if ((Get-ChildItem "$current_path\$download_name").LastWriteTime -gt ((Get-Date).AddDays(-3))) {
+    $dumps = Invoke-RestMethod https://aoe4world.com/api/v0/data_dumps
+    $dump = $dumps | Where-Object {$_.key -eq "leadersboards/rm_1v1/elo"}
     $gz = Invoke-RestMethod $dump.url -OutFile "$current_path\$download_name.gz"
-    C:\'Program Files'\7-Zip\7z.exe x "$current_path\$download_name.gz" -y
+    C:\'Program Files'\7-Zip\7z.exe x "$current_path$download_name.gz" -o"$current_path" -y
 }
+
+
 $csv = import-csv "$current_path\rm_1v1_0.csv"
 
 $csv_date = Get-ChildItem -Path "$current_path\rm_1v1_0.csv" | select CreationTime
